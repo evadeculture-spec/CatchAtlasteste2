@@ -5,6 +5,7 @@ import { formatDateShort, formatKg } from '../lib/format';
 import { computeStats } from '../lib/stats';
 import { useStore } from '../state/store';
 import { useUi } from '../state/ui';
+import { AreaTitle } from '../components/AreaTitle';
 import { DemoBadge, Photo } from '../components/ui';
 import { LiveBanner, journeyCover, journeyPlace } from '../components/journey';
 
@@ -43,11 +44,11 @@ export function HistoryArea() {
 
   return (
     <div className="area area--history">
+      <AreaTitle index={1} />
       <section className="hero hero--history">
         <Photo refId="art:night" alt="Ilustração de uma albufeira à noite, com lua e estrelas refletidas" className="hero-photo" />
         <div className="hero-overlay" aria-hidden="true" />
         <div className="hero-content">
-          <p className="eyebrow eyebrow--light">Gera a tua história</p>
           <h1 id="history-title">Cada jornada merece ser contada.</h1>
           <div className="btn-row">
             <button type="button" className="btn btn--action btn--lg" onClick={() => open({ type: 'log' })}>

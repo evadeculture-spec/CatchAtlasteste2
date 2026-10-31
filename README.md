@@ -36,7 +36,8 @@ Inclui: redirecionamento de SPA, cache imutável de 1 ano para `/assets/*` (fich
 ```
 src/
   components/CubeStage.tsx   transição em cubo (gesto, animação, acessibilidade)
-  components/Header.tsx      marca, perfil, seletor e indicador de dois segmentos
+  components/Header.tsx      marca, perfil e indicador de dois segmentos (tocável)
+  components/AreaTitle.tsx   título de cada área, dentro da face (roda com o cubo)
   areas/                     as duas áreas principais
   sheets/                    vistas secundárias (planeador, plano, captura, história, perfil…)
   state/store.tsx            fonte única de verdade + persistência

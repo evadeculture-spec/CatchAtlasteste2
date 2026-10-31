@@ -14,7 +14,8 @@ interface Props {
 export const AREA_NAMES: [string, string] = ['Prepara a tua jornada', 'Gera a tua história'];
 
 /**
- * Cabeçalho fixo: marca, perfil, seletor das duas áreas e indicador de dois segmentos.
+ * Cabeçalho simples: indicador de dois segmentos (também tocáveis para alternar),
+ * marca e perfil. O nome de cada área vive dentro da própria face e roda com o cubo.
  * O progresso contínuo chega através da variável CSS --p (definida no elemento .app).
  */
 export const Header = forwardRef<HTMLElement, Props>(function Header(
@@ -22,25 +23,37 @@ export const Header = forwardRef<HTMLElement, Props>(function Header(
   ref,
 ) {
   const onKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-      e.preventDefault();
-      e.stopPropagation();
-      const next = e.key === 'ArrowRight' ? 1 : 0;
-      onSelect(next);
-      document.getElementById(tabIds[next])?.focus();
-    } else if (e.key === 'Home' || e.key === 'End') {
-      e.preventDefault();
-      const next = e.key === 'Home' ? 0 : 1;
-      onSelect(next);
-      document.getElementById(tabIds[next])?.focus();
-    }
+    let next: 0 | 1 | null = null;
+    if (e.key === 'ArrowRight' || e.key === 'End') next = 1;
+    if (e.key === 'ArrowLeft' || e.key === 'Home') next = 0;
+    if (next === null) return;
+    e.preventDefault();
+    e.stopPropagation();
+    onSelect(next);
+    document.getElementById(tabIds[next])?.focus();
   };
 
   return (
     <header className="app-header" ref={ref}>
-      <div className="story-bars" aria-hidden="true">
-        <span className="story-bar story-bar--0"><i /></span>
-        <span className="story-bar story-bar--1"><i /></span>
+      <div className="story-bars" role="tablist" aria-label="Áreas da CatchAtlas" onKeyDown={onKeyDown}>
+        {AREA_NAMES.map((name, i) => (
+          <button
+            key={name}
+            id={tabIds[i]}
+            type="button"
+            role="tab"
+            className={`story-bar story-bar--${i}`}
+            aria-label={name}
+            aria-selected={active === i}
+            aria-controls={panelIds[i]}
+            tabIndex={active === i ? 0 : -1}
+            onClick={() => onSelect(i as 0 | 1)}
+          >
+            <span className="story-track">
+              <i />
+            </span>
+          </button>
+        ))}
       </div>
       <div className="brand-row">
         <a className="brand" href="#" onClick={(e) => { e.preventDefault(); onSelect(0); }} aria-label="CatchAtlas — início">
@@ -52,24 +65,6 @@ export const Header = forwardRef<HTMLElement, Props>(function Header(
         <button type="button" className="profile-btn" onClick={onProfile} aria-label="Abrir perfil e definições">
           {initials ? <span className="avatar">{initials}</span> : <UserRound size={20} aria-hidden="true" />}
         </button>
-      </div>
-      <div className="area-switch" role="tablist" aria-label="Áreas da CatchAtlas" onKeyDown={onKeyDown}>
-        <span className="area-thumb" aria-hidden="true" />
-        {AREA_NAMES.map((name, i) => (
-          <button
-            key={name}
-            id={tabIds[i]}
-            type="button"
-            role="tab"
-            className={`area-tab${active === i ? ' is-active' : ''}`}
-            aria-selected={active === i}
-            aria-controls={panelIds[i]}
-            tabIndex={active === i ? 0 : -1}
-            onClick={() => onSelect(i as 0 | 1)}
-          >
-            {name}
-          </button>
-        ))}
       </div>
     </header>
   );
