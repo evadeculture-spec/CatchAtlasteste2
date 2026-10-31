@@ -19,6 +19,18 @@ Não há backend, autenticação nem serviços pagos. Os dados ficam no disposit
 - `localStorage`: jornadas, capturas, narrativas, perfil e preferências;
 - `IndexedDB`: fotografias (reduzidas a um máximo de 1600 px, nunca em base64 no localStorage).
 
+## Publicar no Netlify
+
+O ficheiro `netlify.toml` já tem tudo configurado:
+
+1. No Netlify: **Add new site → Import an existing project** e escolhe este repositório.
+2. O Netlify lê o `netlify.toml` (build `npm ci && npm run build`, pasta `dist`, Node 20). Não é preciso preencher nada.
+3. Deploy.
+
+Inclui: redirecionamento de SPA, cache imutável de 1 ano para `/assets/*` (ficheiros com hash), revalidação do
+`index.html` a cada deploy, cabeçalhos de segurança (CSP sem origens externas, `X-Frame-Options`, `nosniff`,
+`Permissions-Policy` que bloqueia geolocalização) e um web manifest para "Adicionar ao ecrã principal".
+
 ## Estrutura
 
 ```

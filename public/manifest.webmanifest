@@ -1,0 +1,13 @@
+{
+  "name": "CatchAtlas",
+  "short_name": "CatchAtlas",
+  "description": "Prepara a tua jornada e gera a tua história de pesca.",
+  "lang": "pt-PT",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F3F5F3",
+  "theme_color": "#F3F5F3",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}
