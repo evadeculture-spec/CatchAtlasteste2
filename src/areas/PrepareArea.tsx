@@ -3,7 +3,6 @@ import { SPOTS, modalityLabel, speciesLabel } from '../data/constants';
 import { formatDateShort, relativeDay, todayISO } from '../lib/format';
 import { selectNextJourney, useStore } from '../state/store';
 import { useUi } from '../state/ui';
-import { AreaTitle } from '../components/AreaTitle';
 import { DemoBadge, Photo, ProgressBar } from '../components/ui';
 import { Checklist, ConditionsPanel, LiveBanner, SuggestionsList, journeyCover, journeyPlace, prepState } from '../components/journey';
 
@@ -30,19 +29,13 @@ export function PrepareArea() {
 
   return (
     <div className="area area--prepare">
-      <AreaTitle index={0} />
-      <section className="hero hero--prepare">
-        <Photo refId="art:dawn" alt="Ilustração de uma albufeira ao amanhecer, com encostas de pinhal refletidas na água" className="hero-photo" />
-        <div className="hero-overlay" aria-hidden="true" />
-        <div className="hero-content">
-          <h1 id="prepare-title">A próxima grande história começa aqui.</h1>
+      <div className="area-body">
+        <div className="area-actions">
+          <p className="area-lead">A próxima grande história começa aqui.</p>
           <button type="button" className="btn btn--action btn--lg" onClick={() => open({ type: 'planner' })}>
             <Compass size={20} aria-hidden="true" /> Planear jornada
           </button>
         </div>
-      </section>
-
-      <div className="area-body">
         {live && <LiveBanner journey={live} catches={data.catches.filter((c) => c.journeyId === live.id).length} />}
 
         <div className="layout-2col">

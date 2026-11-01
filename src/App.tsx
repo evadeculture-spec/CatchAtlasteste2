@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { CubeStage } from './components/CubeStage';
 import { Header } from './components/Header';
 import { Toasts } from './components/ui';
+import { AreaFace } from './components/AreaTitle';
 import { PrepareArea } from './areas/PrepareArea';
 import { HistoryArea } from './areas/HistoryArea';
 import { StoreProvider, useStore } from './state/store';
@@ -124,7 +125,14 @@ function Shell({ active, setActive }: { active: 0 | 1; setActive: (i: 0 | 1) => 
         <CubeStage
           active={active}
           onChange={setActive}
-          faces={[<PrepareArea key="p" />, <HistoryArea key="h" />]}
+          faces={[
+            <AreaFace key="p" index={0}>
+              <PrepareArea />
+            </AreaFace>,
+            <AreaFace key="h" index={1}>
+              <HistoryArea />
+            </AreaFace>,
+          ]}
           faceIds={PANEL_IDS}
           labelledBy={TAB_IDS}
           reducedMotion={reduced}

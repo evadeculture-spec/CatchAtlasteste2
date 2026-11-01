@@ -29,7 +29,7 @@ export function CompleteSheet({ journeyId, top }: { journeyId: string; top: bool
     }
     completeJourney(j.id, { endTime: endTime || undefined, summary: summary.trim() || undefined, learnings: learnings.trim() || undefined, coverPhoto: cover });
     ui.closeAll();
-    ui.goToArea(1);
+    ui.goToArea(1, true);
     ui.toast('Jornada concluída e guardada no diário.');
     window.setTimeout(() => ui.open({ type: 'journey', journeyId: j.id }), 480);
   };

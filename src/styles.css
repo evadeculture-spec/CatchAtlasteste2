@@ -1915,9 +1915,6 @@ textarea:focus {
   letter-spacing: -0.03em;
   line-height: 1.15;
 }
-.area-title--history .area-title-text {
-  text-align: right;
-}
 @media (min-width: 960px) {
   .area-title-text,
   .area-title--history .area-title-text {
@@ -1952,4 +1949,92 @@ textarea:focus {
   .brand-row {
     max-width: none;
   }
+}
+
+/* ---------- Capa de cada área: só o título, toca para entrar ---------- */
+.area-cover {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  padding: 0;
+  border: 0;
+  text-align: left;
+  color: #fff;
+  overflow: hidden;
+  background: var(--deep);
+  cursor: pointer;
+}
+.area-cover .area-cover-photo {
+  position: absolute;
+  inset: 0;
+}
+.area-cover-photo .photo-tag {
+  top: 16px;
+  right: 16px;
+}
+.area-cover-overlay {
+  position: absolute;
+  inset: 0;
+}
+.area-cover--prepare .area-cover-overlay {
+  background: linear-gradient(0deg, rgba(16, 47, 64, 0.85) 0%, rgba(16, 47, 64, 0.3) 45%, rgba(16, 47, 64, 0) 75%);
+}
+.area-cover--history .area-cover-overlay {
+  background: linear-gradient(0deg, rgba(11, 34, 48, 0.95) 0%, rgba(16, 47, 64, 0.5) 50%, rgba(16, 47, 64, 0.15) 100%);
+}
+.area-cover-content {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px calc(var(--gutter) + var(--safe-r)) calc(40px + var(--safe-b)) calc(var(--gutter) + var(--safe-l));
+}
+.area-cover-title {
+  font-size: clamp(40px, 11vw, 88px);
+  line-height: 1;
+  font-weight: 780;
+  letter-spacing: -0.04em;
+  max-width: 10ch;
+  text-wrap: balance;
+}
+.area-cover-go {
+  flex: none;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--action);
+  color: var(--action-ink);
+  box-shadow: 0 10px 30px rgba(136, 214, 83, 0.35);
+  transition: transform 0.15s;
+}
+.area-cover:hover .area-cover-go {
+  transform: translateX(4px);
+}
+.area-cover:focus-visible {
+  outline-offset: -6px;
+  border-radius: 0;
+}
+
+/* Abertura dos menus de cada área */
+.area-actions {
+  display: grid;
+  gap: 16px;
+  justify-items: start;
+  padding-top: 20px;
+}
+.area-lead {
+  font-size: clamp(22px, 5.4vw, 30px);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  color: var(--deep);
 }

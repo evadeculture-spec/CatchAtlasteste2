@@ -26,7 +26,11 @@ interface UiApi {
   toasts: Toast[];
   toast: (text: string, tone?: Toast['tone']) => void;
   dismissToast: (id: number) => void;
-  goToArea: (i: 0 | 1) => void;
+  /** Muda de área; com `enter`, entra logo nos menus dessa área (em vez da capa). */
+  goToArea: (i: 0 | 1, enter?: boolean) => void;
+  /** Em cada área: false = capa com o título; true = menus da área. */
+  entered: [boolean, boolean];
+  setEntered: (i: 0 | 1, v: boolean) => void;
   draft: <T>(key: string) => T | undefined;
   setDraft: (key: string, value: unknown) => void;
   clearDraft: (key: string) => void;
@@ -39,6 +43,19 @@ export function UiProvider({ children, goToArea }: { children: ReactNode; goToAr
   const [toasts, setToasts] = useState<Toast[]>([]);
   const counter = useRef(0);
   const drafts = useRef(new Map<string, unknown>());
+  const [entered, setEnteredState] = useState<[boolean, boolean]>([false, false]);
+  const setEntered = useCallback((i: 0 | 1, v: boolean) => {
+    setEnteredState((e) => (e[i] === v ? e : ((i === 0 ? [v, e[1]] : [e[0], v]) as [boolean, boolean])));
+    // Cada mudança começa no topo da face.
+    requestAnimationFrame(() => document.querySelector(`[data-face-scroll="${i}"]`)?.scrollTo(0, 0));
+  }, []);
+  const go = useCallback(
+    (i: 0 | 1, enter?: boolean) => {
+      if (enter) setEntered(i, true);
+      goToArea(i);
+    },
+    [goToArea, setEntered],
+  );
 
   const dismissToast = useCallback((id: number) => setToasts((t) => t.filter((x) => x.id !== id)), []);
   const toast = useCallback(
@@ -60,12 +77,14 @@ export function UiProvider({ children, goToArea }: { children: ReactNode; goToAr
       toasts,
       toast,
       dismissToast,
-      goToArea,
+      goToArea: go,
+      entered,
+      setEntered,
       draft: <T,>(k: string) => drafts.current.get(k) as T | undefined,
       setDraft: (k, v) => drafts.current.set(k, v),
       clearDraft: (k) => drafts.current.delete(k),
     }),
-    [sheets, toasts, toast, dismissToast, goToArea],
+    [sheets, toasts, toast, dismissToast, go, entered, setEntered],
   );
   return <Ctx.Provider value={api}>{children}</Ctx.Provider>;
 }

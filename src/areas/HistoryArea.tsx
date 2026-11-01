@@ -5,7 +5,6 @@ import { formatDateShort, formatKg } from '../lib/format';
 import { computeStats } from '../lib/stats';
 import { useStore } from '../state/store';
 import { useUi } from '../state/ui';
-import { AreaTitle } from '../components/AreaTitle';
 import { DemoBadge, Photo } from '../components/ui';
 import { LiveBanner, journeyCover, journeyPlace } from '../components/journey';
 
@@ -44,24 +43,18 @@ export function HistoryArea() {
 
   return (
     <div className="area area--history">
-      <AreaTitle index={1} />
-      <section className="hero hero--history">
-        <Photo refId="art:night" alt="Ilustração de uma albufeira à noite, com lua e estrelas refletidas" className="hero-photo" />
-        <div className="hero-overlay" aria-hidden="true" />
-        <div className="hero-content">
-          <h1 id="history-title">Cada jornada merece ser contada.</h1>
+      <div className="area-body">
+        <div className="area-actions">
+          <p className="area-lead">Cada jornada merece ser contada.</p>
           <div className="btn-row">
             <button type="button" className="btn btn--action btn--lg" onClick={() => open({ type: 'log' })}>
               <NotebookPen size={20} aria-hidden="true" /> Registar jornada
             </button>
-            <button type="button" className="btn btn--glass btn--lg" onClick={addCatch}>
+            <button type="button" className="btn btn--ghost btn--lg" onClick={addCatch}>
               <Fish size={20} aria-hidden="true" /> Adicionar captura
             </button>
           </div>
         </div>
-      </section>
-
-      <div className="area-body">
         {live && <LiveBanner journey={live} catches={(catchesBy.get(live.id) ?? []).length} tone="deep" />}
 
         <section className="block stats-block" aria-labelledby="stats-title">
