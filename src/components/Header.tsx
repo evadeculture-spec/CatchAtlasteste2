@@ -11,7 +11,7 @@ interface Props {
   initials: string;
 }
 
-export const AREA_NAMES: [string, string] = ['Gera a tua jornada', 'Conta a tua história'];
+export const AREA_NAMES: [string, string] = ['Preparar jornada', 'Contar história'];
 
 /**
  * Cabeçalho simples: indicador de dois segmentos (também tocáveis para alternar),

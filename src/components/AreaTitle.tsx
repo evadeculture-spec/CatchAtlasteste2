@@ -1,4 +1,4 @@
-import { ArrowRight, ChevronLeft } from 'lucide-react';
+import { BookOpen, ChevronLeft, Route } from 'lucide-react';
 import { useEffect, useRef, type ReactNode } from 'react';
 import { useUi } from '../state/ui';
 import { Photo } from './ui';
@@ -45,9 +45,9 @@ export function AreaFace({ index, children }: { index: 0 | 1; children: ReactNod
           <Photo refId={COVER_ART[index]} alt={COVER_ALT[index]} className="area-cover-photo" />
           <span className="area-cover-overlay" aria-hidden="true" />
           <span className="area-cover-content">
-            <span className="area-cover-title">{AREA_NAMES[index]}</span>
-            <span className="area-cover-go" aria-hidden="true">
-              <ArrowRight size={26} />
+            <span className="area-cover-pill">
+              {index === 0 ? <Route aria-hidden="true" /> : <BookOpen aria-hidden="true" />}
+              <span>{AREA_NAMES[index]}</span>
             </span>
           </span>
         </button>

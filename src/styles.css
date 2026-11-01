@@ -1980,44 +1980,47 @@ textarea:focus {
   inset: 0;
 }
 .area-cover--prepare .area-cover-overlay {
-  background: linear-gradient(0deg, rgba(16, 47, 64, 0.85) 0%, rgba(16, 47, 64, 0.3) 45%, rgba(16, 47, 64, 0) 75%);
+  background: rgba(16, 47, 64, 0.18);
 }
 .area-cover--history .area-cover-overlay {
-  background: linear-gradient(0deg, rgba(11, 34, 48, 0.95) 0%, rgba(16, 47, 64, 0.5) 50%, rgba(16, 47, 64, 0.15) 100%);
+  background: rgba(11, 34, 48, 0.25);
 }
 .area-cover-content {
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 20px;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 32px calc(var(--gutter) + var(--safe-r)) calc(40px + var(--safe-b)) calc(var(--gutter) + var(--safe-l));
-}
-.area-cover-title {
-  font-size: clamp(40px, 11vw, 88px);
-  line-height: 1;
-  font-weight: 780;
-  letter-spacing: -0.04em;
-  max-width: 10ch;
-  text-wrap: balance;
-}
-.area-cover-go {
-  flex: none;
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
+  position: absolute;
+  inset: 0;
   display: grid;
   place-items: center;
-  background: var(--action);
-  color: var(--action-ink);
-  box-shadow: 0 10px 30px rgba(136, 214, 83, 0.35);
-  transition: transform 0.15s;
+  padding: 24px calc(var(--gutter) + var(--safe-r)) calc(24px + var(--safe-b)) calc(var(--gutter) + var(--safe-l));
 }
-.area-cover:hover .area-cover-go {
-  transform: translateX(4px);
+/* Pílula central, como a referência: verde-água, texto azul profundo, ícone à esquerda. */
+.area-cover-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.85em 1.6em;
+  border-radius: 999px;
+  background: #5fc4a2;
+  color: #0f2f3e;
+  font-size: clamp(20px, 3.2vw, 30px);
+  font-weight: 650;
+  letter-spacing: -0.015em;
+  line-height: 1;
+  white-space: nowrap;
+  box-shadow: 0 14px 40px rgba(6, 24, 32, 0.35);
+  transition: transform 0.15s, background-color 0.15s;
+}
+.area-cover-pill svg {
+  width: 1.15em;
+  height: 1.15em;
+  stroke-width: 2.2;
+  flex: none;
+}
+.area-cover:hover .area-cover-pill {
+  background: #6dceae;
+  transform: translateY(-2px);
+}
+.area-cover:active .area-cover-pill {
+  transform: scale(0.98);
 }
 .area-cover:focus-visible {
   outline-offset: -6px;

@@ -3,8 +3,8 @@
 Aplicação web, pensada primeiro para telemóvel, para pesca desportiva de predadores de água doce em Portugal.
 Tem duas áreas, ligadas por uma rotação em cubo semelhante à passagem entre Stories:
 
-- **Gera a tua jornada**: onde vou, em que condições e como me preparo.
-- **Conta a tua história**: o que vivi, o que capturei e o que aprendi.
+- **Preparar jornada**: onde vou, em que condições e como me preparo.
+- **Contar história**: o que vivi, o que capturei e o que aprendi.
 
 ## Executar
 
@@ -37,7 +37,7 @@ Inclui: redirecionamento de SPA, cache imutável de 1 ano para `/assets/*` (fich
 src/
   components/CubeStage.tsx   transição em cubo (gesto, animação, acessibilidade)
   components/Header.tsx      marca, perfil e indicador de dois segmentos (tocável)
-  components/AreaTitle.tsx   capa de cada área (só o título; toca para entrar nos menus)
+  components/AreaTitle.tsx   capa de cada área (pílula central; toca para entrar nos menus)
   areas/                     as duas áreas principais
   sheets/                    vistas secundárias (planeador, plano, captura, história, perfil…)
   state/store.tsx            fonte única de verdade + persistência
